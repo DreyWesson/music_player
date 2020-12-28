@@ -1,25 +1,22 @@
-import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons"
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 const SwitchTheme = ({ theme, setTheme }) => {
   const switchTheme = () => {
-    if (theme === "Dark") {
-      setTheme("Light")
-    } else {
-      setTheme("Dark")
-    }
-    localStorage.setItem("theme", theme === "Dark" ? "Light" : "Dark")
-  }
+    theme === "Dark" ? setTheme("Light") : setTheme("Dark");
+
+    localStorage.setItem("theme", theme === "Dark" ? "Light" : "Dark");
+  };
 
   return (
-    <div className='changeTheme'>
+    <div className="changeTheme">
       <span style={{ color: theme === "Light" ? "black" : "white" }}>
         {theme}
       </span>
       <div
         onClick={switchTheme}
-        className='switchDiv'
+        className="switchDiv"
         style={{ background: theme === "Light" ? "#edc22b" : "#2f2f2f" }}
       >
         <FontAwesomeIcon
@@ -29,10 +26,10 @@ const SwitchTheme = ({ theme, setTheme }) => {
             color: "white",
             display: theme === "Light" ? "none" : "block",
           }}
-          size='2x'
+          size="2x"
           icon={faMoon}
         />
-        <div className='Switchcircle'></div>
+        <div className="Switchcircle"></div>
         <FontAwesomeIcon
           style={{
             width: "28px",
@@ -40,12 +37,12 @@ const SwitchTheme = ({ theme, setTheme }) => {
             color: "white",
             display: theme === "Light" ? "block" : "none",
           }}
-          id='sun-SVG'
-          size='2x'
+          id="sun-SVG"
+          size="2x"
           icon={faSun}
         />
       </div>
     </div>
-  )
-}
-export default SwitchTheme
+  );
+};
+export default SwitchTheme;
