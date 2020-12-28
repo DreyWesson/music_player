@@ -3,7 +3,7 @@ import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
 import { Brightness2Outlined, WbSunnyOutlined } from "@material-ui/icons";
 
-export const SwitchTheme = () => {
+export const SwitchTheme = ({ setLibraryStatus, libraryStatus }) => {
   const [{ themeState }, dispatch] = useStateValue();
 
   const setThemeState = (mode) =>
@@ -12,7 +12,11 @@ export const SwitchTheme = () => {
         themeState: mode,
       }),
     switchTheme = () => {
-      themeState === "Dark" ? setThemeState("Light") : setThemeState("Dark");
+      function onThemeChange(theme) {
+        setThemeState(theme);
+        setLibraryStatus(!libraryStatus);
+      }
+      themeState === "Dark" ? onThemeChange("Light") : onThemeChange("Dark");
     };
 
   return (

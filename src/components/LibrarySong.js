@@ -11,6 +11,8 @@ export const LibrarySong = ({
   setSongs,
   id,
   currentSong,
+  libraryStatus,
+  setLibraryStatus,
 }) => {
   const selectSongHandler = async (e) => {
     await setCurrentSong(song);
@@ -21,6 +23,7 @@ export const LibrarySong = ({
       id === song.id ? { ...song, active: true } : { ...song, active: false }
     );
     setSongs(activeSong);
+    setLibraryStatus(!libraryStatus);
   };
   return (
     <div

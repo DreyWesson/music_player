@@ -8,6 +8,7 @@ export const Library = ({
   isPlaying,
   setSongs,
   libraryStatus,
+  setLibraryStatus,
   currentSong,
 }) => {
   const songsLibrary = useRef(null);
@@ -38,11 +39,16 @@ export const Library = ({
               songs={songs}
               audioRef={audioRef}
               id={song.id}
+              setLibraryStatus={setLibraryStatus}
+              libraryStatus={libraryStatus}
             />
           ))}
         </div>
         <div className="switchSection">
-          <SwitchTheme />
+          <SwitchTheme
+            setLibraryStatus={setLibraryStatus}
+            libraryStatus={libraryStatus}
+          />
         </div>
       </div>
     )

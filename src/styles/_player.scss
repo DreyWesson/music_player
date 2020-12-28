@@ -10,8 +10,11 @@
 .play-control {
   display: flex;
   justify-content: space-between;
-  // align-content: center;
   align-items: center;
+  margin: 0 !important;
+}
+.play-control .MuiIconButton-root {
+  padding: 0;
 }
 .time-control {
   position: relative;

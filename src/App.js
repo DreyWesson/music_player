@@ -71,9 +71,8 @@ function App() {
       currentTime: 0,
       duration: 0,
       animationPercentage: 0,
-    });
-
-  const [libraryStatus, setLibraryStatus] = useState(false),
+    }),
+    [libraryStatus, setLibraryStatus] = useState(false),
     [repeat, setRepeat] = useState(false);
 
   const songEndHandler = async () => {
@@ -83,7 +82,6 @@ function App() {
       return;
     }
     const currentIndex = songs?.findIndex((song) => song.id === currentSong.id);
-    console.log(currentIndex);
     await setCurrentSong(songs[[(currentIndex + 1) % songs.length]]);
     if (isPlaying) audioRef.current.play();
   };
@@ -122,6 +120,7 @@ function App() {
           setCurrentSong={setCurrentSong}
           audioRef={audioRef}
           isPlaying={isPlaying}
+          setLibraryStatus={setLibraryStatus}
         />
         <audio
           onLoadedMetadataCapture={setSongVolume}
