@@ -7,8 +7,6 @@ const Library = ({
   audioRef,
   isPlaying,
   setSongs,
-  theme,
-  setTheme,
   libraryStatus,
   currentSong,
 }) => {
@@ -43,7 +41,7 @@ const Library = ({
         ))}
       </div>
       <div className="switchSection">
-        <SwitchTheme theme={theme} setTheme={setTheme} />
+        <SwitchTheme />
       </div>
     </div>
   );

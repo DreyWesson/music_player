@@ -9,12 +9,12 @@ import data from "./data";
 import { useStateValue } from "./StateProvider";
 
 function App() {
-  // const [{ theme }] = useStateValue();
+  const [{ themeState }] = useStateValue();
 
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime,
       duration = e.target.duration,
-      precentage = Math.round(
+      percentage = Math.round(
         (Math.round(current) / Math.round(duration)) * 100
       );
 
@@ -22,7 +22,7 @@ function App() {
       ...songInfo,
       currentTime: current,
       duration,
-      animationPercentage: precentage,
+      animationPercentage: percentage,
     });
   };
 
@@ -36,12 +36,8 @@ function App() {
       currentTime: 0,
       duration: 0,
       animationPercentage: 0,
-    }),
-    themeLocal = localStorage.getItem("theme");
-  // Initial state
-  themeLocal === null && localStorage.setItem("theme", "Light");
+    });
 
-  const [theme, setTheme] = useState(themeLocal);
   const [libraryStatus, setLibraryStatus] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const volumeStorage = () =>
@@ -64,7 +60,7 @@ function App() {
   };
   return (
     <div
-      className={`App ${theme === "Dark" ? "DarkTheme" : ""} ${
+      className={`App ${themeState === "Dark" ? "DarkTheme" : ""} ${
         libraryStatus ? "active-library" : ""
       }`}
     >
@@ -94,8 +90,6 @@ function App() {
         setCurrentSong={setCurrentSong}
         audioRef={audioRef}
         isPlaying={isPlaying}
-        theme={theme}
-        setTheme={setTheme}
       />
       <audio
         onLoadedMetadataCapture={setSongVolume}

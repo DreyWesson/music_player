@@ -1,45 +1,48 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { useStateValue } from "../StateProvider";
+import { actionTypes } from "../reducer";
+import { Brightness2Outlined, WbSunnyOutlined } from "@material-ui/icons";
 
-const SwitchTheme = ({ theme, setTheme }) => {
-  const switchTheme = () => {
-    theme === "Dark" ? setTheme("Light") : setTheme("Dark");
+const SwitchTheme = () => {
+  const [{ themeState }, dispatch] = useStateValue();
 
-    localStorage.setItem("theme", theme === "Dark" ? "Light" : "Dark");
-  };
+  const setThemeState = (mode) =>
+      dispatch({
+        type: actionTypes.SET_THEME_STATE,
+        themeState: mode,
+      }),
+    switchTheme = () => {
+      themeState === "Dark" ? setThemeState("Light") : setThemeState("Dark");
+    };
 
   return (
     <div className="changeTheme">
-      <span style={{ color: theme === "Light" ? "black" : "white" }}>
-        {theme}
+      <span style={{ color: themeState === "Light" ? "black" : "white" }}>
+        {themeState}
       </span>
       <div
         onClick={switchTheme}
         className="switchDiv"
-        style={{ background: theme === "Light" ? "#edc22b" : "#2f2f2f" }}
+        style={{ background: themeState === "Light" ? "#edc22b" : "#2f2f2f" }}
       >
-        <FontAwesomeIcon
+        <Brightness2Outlined
+          fontSize="large"
           style={{
             width: "28px",
             height: "28px",
             color: "white",
-            display: theme === "Light" ? "none" : "block",
+            display: themeState === "Light" ? "none" : "block",
           }}
-          size="2x"
-          icon={faMoon}
         />
         <div className="Switchcircle"></div>
-        <FontAwesomeIcon
+        <WbSunnyOutlined
+          fontSize="large"
           style={{
             width: "28px",
             height: "28px",
             color: "white",
-            display: theme === "Light" ? "block" : "none",
+            display: themeState === "Light" ? "block" : "none",
           }}
-          id="sun-SVG"
-          size="2x"
-          icon={faSun}
         />
       </div>
     </div>
