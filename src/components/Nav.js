@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMusic } from "@fortawesome/free-solid-svg-icons";
 
-const Nav = ({ libraryStatus, setLibraryStatus }) => {
+export const Nav = ({ libraryStatus, setLibraryStatus }) => {
   return (
     <nav>
       <h1>Waves</h1>
@@ -16,4 +16,3 @@ const Nav = ({ libraryStatus, setLibraryStatus }) => {
     </nav>
   );
 };
-export default Nav;

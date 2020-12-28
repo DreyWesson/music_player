@@ -15,7 +15,7 @@ import { IconButton } from "@material-ui/core";
 import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
 
-const Player = ({
+export const Player = ({
   currentSong,
   isPlaying,
   setIsPlaying,
@@ -30,6 +30,12 @@ const Player = ({
   setSongVolume,
 }) => {
   const [{ volume }, dispatch] = useStateValue();
+  const setVolume = (volume) => {
+    dispatch({
+      type: actionTypes.SET_VOLUME,
+      volume,
+    });
+  };
 
   //Handlers
   const shuffleHandler = async () => {
@@ -69,18 +75,13 @@ const Player = ({
   };
   const changeVolumeHandler = (e) => {
     const value = e.target.value / 100;
-    dispatch({
-      type: actionTypes.SET_VOLUME,
-      volume: value,
-    });
+    setVolume(value);
     audioRef.current.volume = volume;
     if (value === 0) audioRef.current.volume = 0;
   };
-  const getTime = (time) => {
-    return (
-      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
-    );
-  };
+  const getTime = (time) =>
+    ((time / 60) | 0) + ":" + ("0" + (time % 60 | 0)).slice(-2);
+
   const skipSong = async (direction) => {
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     if (direction === "back") {
@@ -99,40 +100,25 @@ const Player = ({
     if (isPlaying) audioRef.current.play();
   };
   const volumeIcon = () => {
-    if (volume >= 0.5) {
-      return (
-        <IconButton className="audioSVG">
-          <VolumeUpSharp onClick={muteVolume} fontSize="large" />
-        </IconButton>
-      );
-    } else if (volume === 0) {
-      return (
-        <IconButton className="audioSVG" onClick={muteVolume}>
-          <VolumeMuteSharp fontSize="large" />
-        </IconButton>
-      );
-    } else if (volume < 0.5) {
-      return (
-        <IconButton className="audioSVG" onClick={muteVolume}>
-          <VolumeDownSharp fontSize="large" />
-        </IconButton>
-      );
-    }
+    const setVolumeIcon = () => {
+      if (volume >= 0.5) {
+        return <VolumeUpSharp onClick={muteVolume} fontSize="large" />;
+      } else if (volume === 0) {
+        return <VolumeMuteSharp fontSize="large" />;
+      } else if (volume < 0.5) {
+        return <VolumeDownSharp fontSize="large" />;
+      }
+    };
+    return <IconButton className="audioSVG">{setVolumeIcon()}</IconButton>;
   };
   const [activeVolume, setActiveVolume] = useState(false);
   const muteVolume = () => {
     if (volume === 0) {
-      dispatch({
-        type: actionTypes.SET_VOLUME,
-        volume: volume,
-      });
+      setVolume(volume);
       audioRef.current.volume = volume;
       return;
     }
-    dispatch({
-      type: actionTypes.SET_VOLUME,
-      volume: 0,
-    });
+    setVolume(0);
     audioRef.current.volume = 0;
   };
 
@@ -174,7 +160,7 @@ const Player = ({
         <div
           className="track"
           style={{
-            background: `linear-gradient(to right,${currentSong.color[0]},${currentSong.color[1]})`,
+            background: `linear-gradient(to right,${currentSong?.color[0]},${currentSong?.color[1]})`,
           }}
         >
           <input
@@ -230,8 +216,8 @@ const Player = ({
           <div
             className={`${repeat ? "active-repeat" : ""}`}
             style={{
-              background: currentSong.color[0],
-              filter: `drop-shadow(0px 0px 3px ${currentSong.color[0]})`,
+              background: currentSong?.color[0],
+              filter: `drop-shadow(0px 0px 3px ${currentSong?.color[0]})`,
             }}
           ></div>
         </div>
@@ -239,4 +225,3 @@ const Player = ({
     </div>
   );
 };
-export default Player;

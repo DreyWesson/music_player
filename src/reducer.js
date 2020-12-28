@@ -1,10 +1,23 @@
 export const initialState = {
   themeState: "Light",
   volume: 1,
+  songs: [
+    {
+      name: "Beaver Creek",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
+      artist: "Aso, Middle School, Aviino",
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
+      color: ["#205950", "#2ab3bf"],
+      id: "vsGb2i2CmbigpNV30BIX",
+      active: true,
+    },
+  ],
 };
 export const actionTypes = {
   SET_THEME_STATE: "SET_THEME_STATE",
   SET_VOLUME: "SET_VOLUME",
+  SET_SONGS: "SET_SONGS",
 };
 
 function reducer(state, action) {
@@ -14,6 +27,8 @@ function reducer(state, action) {
       return { ...state, themeState: action.themeState };
     case actionTypes.SET_VOLUME:
       return { ...state, volume: action.volume };
+    case actionTypes.SET_SONGS:
+      return { ...state, songs: action.songs };
     default:
       return state;
   }

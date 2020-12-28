@@ -63,32 +63,35 @@ function chillHop() {
     },
     //ADD MORE HERE
     {
-        name:"Going Back",
-        cover:"https://chillhop.com/wp-content/uploads/2020/10/737bb830d34592344eb4a2a1d2c006cdbfc811d9-1024x1024.jpg",
-        artist:"Swørn",
-        id: uuidv4(),
-        audio: "https://mp3.chillhop.com/serve.php/?mp3=10310",
-        color: ["#365663", "#2b2a2f"],
-        active: false,
+      name: "Going Back",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/10/737bb830d34592344eb4a2a1d2c006cdbfc811d9-1024x1024.jpg",
+      artist: "Swørn",
+      id: uuidv4(),
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=10310",
+      color: ["#365663", "#2b2a2f"],
+      active: false,
     },
     {
-        name:"Far Away",
-        cover:"https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
-        artist:"Swørn",
-        id: uuidv4(),
-        audio: "https://mp3.chillhop.com/serve.php/?mp3=7951",
-        color: ["#da8489", "#3e3550"],
-        active: false,
+      name: "Far Away",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
+      artist: "Swørn",
+      id: uuidv4(),
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=7951",
+      color: ["#da8489", "#3e3550"],
+      active: false,
     },
     {
-        name:"Pick Me Up",
-        cover:"https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
-        artist:"Aso, Middle School, Aviino",
-        id: uuidv4(),
-        audio: "https://mp3.chillhop.com/serve.php/?mp3=7949",
-        color: ["#d84c57", "#4db9c6"],
-        active: false,
-    }
+      name: "Pick Me Up",
+      cover:
+        "https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
+      artist: "Aso, Middle School, Aviino",
+      id: uuidv4(),
+      audio: "https://mp3.chillhop.com/serve.php/?mp3=7949",
+      color: ["#d84c57", "#4db9c6"],
+      active: false,
+    },
   ];
 }
 
