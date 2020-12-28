@@ -12,6 +12,8 @@ import {
   VolumeUpSharp,
 } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
+import { useStateValue } from "../StateProvider";
+import { actionTypes } from "../reducer";
 
 const Player = ({
   currentSong,
@@ -25,10 +27,10 @@ const Player = ({
   setSongs,
   setRepeat,
   repeat,
-  setVolume,
-  volume,
   setSongVolume,
 }) => {
+  const [{ volume }, dispatch] = useStateValue();
+
   //Handlers
   const shuffleHandler = async () => {
     let songsref = [...songs];
@@ -67,8 +69,10 @@ const Player = ({
   };
   const changeVolumeHandler = (e) => {
     const value = e.target.value / 100;
-    localStorage.setItem("volume", value);
-    setVolume(value);
+    dispatch({
+      type: actionTypes.SET_VOLUME,
+      volume: value,
+    });
     audioRef.current.volume = volume;
     if (value === 0) audioRef.current.volume = 0;
   };
@@ -98,29 +102,19 @@ const Player = ({
     if (volume >= 0.5) {
       return (
         <IconButton className="audioSVG">
-          <VolumeUpSharp
-            onClick={muteVolume}
-            // className="audioSVG"
-            fontSize="large"
-          />
+          <VolumeUpSharp onClick={muteVolume} fontSize="large" />
         </IconButton>
       );
     } else if (volume === 0) {
       return (
         <IconButton className="audioSVG" onClick={muteVolume}>
-          <VolumeMuteSharp
-            // className="audioSVG"
-            fontSize="large"
-          />
+          <VolumeMuteSharp fontSize="large" />
         </IconButton>
       );
     } else if (volume < 0.5) {
       return (
         <IconButton className="audioSVG" onClick={muteVolume}>
-          <VolumeDownSharp
-            // className="audioSVG"
-            fontSize="large"
-          />
+          <VolumeDownSharp fontSize="large" />
         </IconButton>
       );
     }
@@ -128,11 +122,17 @@ const Player = ({
   const [activeVolume, setActiveVolume] = useState(false);
   const muteVolume = () => {
     if (volume === 0) {
-      setVolume(JSON.parse(localStorage.getItem("volume")));
-      audioRef.current.volume = JSON.parse(localStorage.getItem("volume"));
+      dispatch({
+        type: actionTypes.SET_VOLUME,
+        volume: volume,
+      });
+      audioRef.current.volume = volume;
       return;
     }
-    setVolume(0);
+    dispatch({
+      type: actionTypes.SET_VOLUME,
+      volume: 0,
+    });
     audioRef.current.volume = 0;
   };
 

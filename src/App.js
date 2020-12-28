@@ -9,7 +9,7 @@ import data from "./data";
 import { useStateValue } from "./StateProvider";
 
 function App() {
-  const [{ themeState }] = useStateValue();
+  const [{ themeState, volume }] = useStateValue();
 
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime,
@@ -40,10 +40,10 @@ function App() {
 
   const [libraryStatus, setLibraryStatus] = useState(false);
   const [repeat, setRepeat] = useState(false);
-  const volumeStorage = () =>
-    localStorage.getItem("volume") ? localStorage.getItem("volume") : 1; //volume initial state
+  // const volumeStorage = () =>
+  // localStorage.getItem("volume") ? localStorage.getItem("volume") : 1; //volume initial state
 
-  const [volume, setVolume] = useState(JSON.parse(volumeStorage()));
+  // const [volume, setVolume] = useState(JSON.parse(volumeStorage()));
 
   const songEndHandler = async () => {
     if (repeat) {
@@ -56,7 +56,7 @@ function App() {
     if (isPlaying) audioRef.current.play();
   };
   const setSongVolume = () => {
-    audioRef.current.volume = volumeStorage();
+    audioRef.current.volume = volume;
   };
   return (
     <div
@@ -68,8 +68,8 @@ function App() {
       <Song currentSong={currentSong} isPlaying={isPlaying} />
       <Player
         setSongVolume={setSongVolume}
-        volume={volume}
-        setVolume={setVolume}
+        // volume={volume}
+        // setVolume={setVolume}
         audioRef={audioRef}
         currentSong={currentSong}
         isPlaying={isPlaying}
