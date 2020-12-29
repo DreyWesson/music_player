@@ -7,7 +7,6 @@ export const LibrarySong = ({
   song,
   setCurrentSong,
   audioRef,
-  // isPlaying,
   id,
   currentSong,
 }) => {

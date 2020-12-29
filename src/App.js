@@ -57,7 +57,6 @@ function App() {
   //Ref
   const audioRef = useRef(null),
     [currentSong, setCurrentSong] = useState(songs?.[0]),
-    // [isPlaying, setIsPlaying] = useState(false),
     [songInfo, setSongInfo] = useState({
       currentTime: 0,
       duration: 0,

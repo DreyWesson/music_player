@@ -17,12 +17,10 @@ import { actionTypes } from "../reducer";
 
 export const Player = ({
   currentSong,
-
   audioRef,
   songInfo,
   setSongInfo,
   setCurrentSong,
-
   setRepeat,
   repeat,
 }) => {
