@@ -1,17 +1,20 @@
 import React, { useRef, useEffect } from "react";
+import { useStateValue } from "../StateProvider";
 import { LibrarySong, SwitchTheme } from "./index";
 
 export const Library = ({
-  songs,
+  // songs,
   setCurrentSong,
   audioRef,
   isPlaying,
-  setSongs,
+  // setSongs,
   libraryStatus,
   setLibraryStatus,
   currentSong,
 }) => {
   const songsLibrary = useRef(null);
+  const [{ songs }] = useStateValue();
+
   useEffect(() => {
     //Scroll to selected
     const index = songs.findIndex((e) => e.id === currentSong.id),
@@ -30,7 +33,7 @@ export const Library = ({
           {songs.map((song) => (
             <LibrarySong
               currentSong={currentSong}
-              setSongs={setSongs}
+              // setSongs={setSongs}
               isPlaying={isPlaying}
               setCurrentSong={setCurrentSong}
               key={song.id}

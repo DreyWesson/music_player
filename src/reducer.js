@@ -14,6 +14,9 @@ export const initialState = {
     },
   ],
 };
+
+// setLibraryStatus, libraryStatus , audioRef, isPlaying, songs, setSongs, setCurrentSong, currentSong
+
 export const actionTypes = {
   SET_THEME_STATE: "SET_THEME_STATE",
   SET_VOLUME: "SET_VOLUME",

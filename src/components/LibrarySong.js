@@ -1,28 +1,39 @@
 import React from "react";
+import { actionTypes } from "../reducer";
+import { useStateValue } from "../StateProvider";
 import { activeSongFN } from "../utils";
 
 export const LibrarySong = ({
   song,
   setCurrentSong,
-  songsLibrary,
-  songs,
+  // songs,
   audioRef,
   isPlaying,
-  setSongs,
+  // setSongs,
   id,
   currentSong,
   libraryStatus,
   setLibraryStatus,
 }) => {
+  const [{ songs }, dispatch] = useStateValue();
+
   const selectSongHandler = async (e) => {
     await setCurrentSong(song);
-    activeSongFN(songs, currentSong, setSongs);
+    dispatch({
+      type: actionTypes.SET_SONGS,
+      songs: activeSongFN(songs, currentSong)
+    })
+    
     if (isPlaying) audioRef.current.play();
 
     const activeSong = songs.map((song) =>
       id === song.id ? { ...song, active: true } : { ...song, active: false }
     );
-    setSongs(activeSong);
+    dispatch({
+      type: actionTypes.SET_SONGS,
+      songs: activeSong
+    })
+    // setSongs(activeSong);
     setLibraryStatus(!libraryStatus);
   };
   return (

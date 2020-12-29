@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
+
 function chillHop() {
   return [
     {
@@ -8,7 +9,7 @@ function chillHop() {
       artist: "Aso, Middle School, Aviino",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
       color: ["#205950", "#2ab3bf"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: true,
     },
     {
@@ -18,7 +19,7 @@ function chillHop() {
       artist: "Aiguille",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9272",
       color: ["#EF8EA9", "#ab417f"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: false,
     },
     {
@@ -28,7 +29,7 @@ function chillHop() {
       artist: "Swørn",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9222",
       color: ["#CD607D", "#c94043"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: false,
     },
     {
@@ -38,7 +39,7 @@ function chillHop() {
       artist: "Aiguille",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9148",
       color: ["#EF8EA9", "#ab417f"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: false,
     },
     {
@@ -48,7 +49,7 @@ function chillHop() {
       artist: "Swørn",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=9228",
       color: ["#CD607D", "#c94043"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: false,
     },
     {
@@ -58,16 +59,16 @@ function chillHop() {
       artist: "Aso, Middle School, Aviino",
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10074",
       color: ["#205950", "#2ab3bf"],
-      id: uuidv4(),
+      // id: uuidv4(),
       active: false,
     },
-    //ADD MORE HERE
+
     {
       name: "Going Back",
       cover:
         "https://chillhop.com/wp-content/uploads/2020/10/737bb830d34592344eb4a2a1d2c006cdbfc811d9-1024x1024.jpg",
       artist: "Swørn",
-      id: uuidv4(),
+      // id: uuidv4(),
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10310",
       color: ["#365663", "#2b2a2f"],
       active: false,
@@ -77,7 +78,7 @@ function chillHop() {
       cover:
         "https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
       artist: "Swørn",
-      id: uuidv4(),
+      // id: uuidv4(),
       audio: "https://mp3.chillhop.com/serve.php/?mp3=7951",
       color: ["#da8489", "#3e3550"],
       active: false,
@@ -87,7 +88,7 @@ function chillHop() {
       cover:
         "https://chillhop.com/wp-content/uploads/2020/07/bc9a7af2ad67de703541c2c7a91e3df74ab494c0-1024x1024.jpg",
       artist: "Aso, Middle School, Aviino",
-      id: uuidv4(),
+      // id: uuidv4(),
       audio: "https://mp3.chillhop.com/serve.php/?mp3=7949",
       color: ["#d84c57", "#4db9c6"],
       active: false,

@@ -23,13 +23,12 @@ export const Player = ({
   songInfo,
   setSongInfo,
   setCurrentSong,
-  songs,
-  setSongs,
+  // songs,
+  // setSongs,
   setRepeat,
   repeat,
-  setSongVolume,
 }) => {
-  const [{ volume }, dispatch] = useStateValue();
+  const [{ songs, volume }, dispatch] = useStateValue();
   const setVolume = (volume) => {
     dispatch({
       type: actionTypes.SET_VOLUME,
@@ -46,7 +45,11 @@ export const Player = ({
     let randomSong = songsref[random];
     setIsPlaying(true);
     await setCurrentSong(randomSong);
-    activeSongFN(songs, currentSong, setSongs);
+    dispatch({
+      type: actionTypes.SET_SONGS,
+      songs: activeSongFN(songs, currentSong),
+    });
+    // activeSongFN(songs, currentSong, setSongs);
     audioRef.current.play();
     const activeSong = songs.map((song) => {
       if (song === randomSong) {
@@ -55,7 +58,11 @@ export const Player = ({
         return { ...song, active: false };
       }
     });
-    setSongs(activeSong);
+    dispatch({
+      type: actionTypes.SET_SONGS,
+      songs: activeSong,
+    });
+    // setSongs(activeSong);
   };
   const playSongHandler = () => {
     if (isPlaying === false) {
@@ -88,14 +95,25 @@ export const Player = ({
       await setCurrentSong(
         songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
       );
-      activeSongFN(
-        songs,
-        songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1],
-        setSongs
-      );
+      dispatch({
+        type: actionTypes.SET_SONGS,
+        songs: activeSongFN(
+          songs,
+          songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
+        ),
+      });
+      // activeSongFN(
+      //   songs,
+      //   songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1],
+      //   setSongs
+      // );
     } else {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-      activeSongFN(songs, songs[(currentIndex + 1) % songs.length], setSongs);
+      // activeSongFN(songs, songs[(currentIndex + 1) % songs.length], setSongs);
+      dispatch({
+        type: actionTypes.SET_SONGS,
+        songs: activeSongFN(songs, songs[(currentIndex + 1) % songs.length]),
+      });
     }
     if (isPlaying) audioRef.current.play();
   };

@@ -3,21 +3,23 @@ import "./styles/app.scss";
 import { Nav, Song, Player, Library } from "./components";
 import { useStateValue } from "./StateProvider";
 import db from "./firebase";
+import { actionTypes } from "./reducer";
+// import data from "./data";
 
 function App() {
-  const [{ themeState, volume }] = useStateValue();
-  const [songs, setSongs] = useState([
-    {
-      name: "Beaver Creek",
-      cover:
-        "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
-      artist: "Aso, Middle School, Aviino",
-      audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
-      color: ["#205950", "#2ab3bf"],
-      id: "vsGb2i2CmbigpNV30BIX",
-      active: true,
-    },
-  ]);
+  const [{ themeState, volume, songs }, dispatch] = useStateValue();
+  // const [songs, setSongs] = useState([
+  //   {
+  //     name: "Beaver Creek",
+  //     cover:
+  //       "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
+  //     artist: "Aso, Middle School, Aviino",
+  //     audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
+  //     color: ["#205950", "#2ab3bf"],
+  //     id: "vsGb2i2CmbigpNV30BIX",
+  //     active: true,
+  //   },
+  // ]);
 
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime,
@@ -35,10 +37,8 @@ function App() {
   };
 
   // SEED data into FIREBASE from data.js
-  // import data from "./data";
   //
   // useEffect(() => {
-  //   console.log(data);
   //   data().forEach(({ name, cover, artist, audio, color, active }) => {
   //     db.collection("songs").add({
   //       name,
@@ -53,13 +53,14 @@ function App() {
 
   useEffect(() => {
     db.collection("songs").onSnapshot((snapshot) =>
-      setSongs(
-        snapshot.docs.map((doc) => {
+      dispatch({
+        type: actionTypes.SET_SONGS,
+        songs: snapshot.docs.map((doc) => {
           const data = doc?.data(),
             id = doc?.id;
           return { id, ...data };
-        })
-      )
+        }),
+      })
     );
   }, []);
 
@@ -97,6 +98,7 @@ function App() {
           libraryStatus={libraryStatus}
           setLibraryStatus={setLibraryStatus}
         />
+
         <Song currentSong={currentSong} isPlaying={isPlaying} />
         <Player
           setSongVolume={setSongVolume}
@@ -108,7 +110,7 @@ function App() {
           setSongInfo={setSongInfo}
           setCurrentSong={setCurrentSong}
           songs={songs}
-          setSongs={setSongs}
+          // setSongs={setSongs}
           setRepeat={setRepeat}
           repeat={repeat}
         />
@@ -116,7 +118,7 @@ function App() {
           currentSong={currentSong}
           songs={songs}
           libraryStatus={libraryStatus}
-          setSongs={setSongs}
+          // setSongs={setSongs}
           setCurrentSong={setCurrentSong}
           audioRef={audioRef}
           isPlaying={isPlaying}
