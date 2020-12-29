@@ -8,7 +8,7 @@ import { actionTypes } from "./reducer";
 
 function App() {
   const [
-    { themeState, volume, songs, libraryStatus },
+    { themeState, volume, songs, libraryStatus, isPlaying },
     dispatch,
   ] = useStateValue();
   const timeUpdateHandler = (e) => {
@@ -57,13 +57,12 @@ function App() {
   //Ref
   const audioRef = useRef(null),
     [currentSong, setCurrentSong] = useState(songs?.[0]),
-    [isPlaying, setIsPlaying] = useState(false),
+    // [isPlaying, setIsPlaying] = useState(false),
     [songInfo, setSongInfo] = useState({
       currentTime: 0,
       duration: 0,
       animationPercentage: 0,
     }),
-    // [libraryStatus, setLibraryStatus] = useState(false),
     [repeat, setRepeat] = useState(false);
 
   const songEndHandler = async () => {
@@ -84,18 +83,13 @@ function App() {
           libraryStatus ? "active-library" : ""
         }`}
       >
-        <Nav
-        // libraryStatus={libraryStatus}
-        // setLibraryStatus={setLibraryStatus}
-        />
+        <Nav />
 
-        <Song currentSong={currentSong} isPlaying={isPlaying} />
+        <Song currentSong={currentSong} />
         <Player
           setSongVolume={setSongVolume}
           audioRef={audioRef}
           currentSong={currentSong}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
           songInfo={songInfo}
           setSongInfo={setSongInfo}
           setCurrentSong={setCurrentSong}
@@ -104,11 +98,8 @@ function App() {
         />
         <Library
           currentSong={currentSong}
-          // libraryStatus={libraryStatus}
           setCurrentSong={setCurrentSong}
           audioRef={audioRef}
-          isPlaying={isPlaying}
-          // setLibraryStatus={setLibraryStatus}
         />
         <audio
           onLoadedMetadataCapture={setSongVolume}

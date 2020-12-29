@@ -1,6 +1,9 @@
 import React from "react";
+import { useStateValue } from "../StateProvider";
 
-export const Song = ({ currentSong, isPlaying }) => {
+export const Song = ({ currentSong }) => {
+  const [{ isPlaying }] = useStateValue();
+
   return (
     <div className="song-container">
       <img

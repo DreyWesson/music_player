@@ -14,7 +14,6 @@ export const SwitchTheme = () => {
     switchTheme = () => {
       function onThemeChange(theme) {
         setThemeState(theme);
-        // setLibraryStatus(!libraryStatus);
         dispatch({
           type: actionTypes.SET_LIBRARY_STATUS,
           libraryStatus: !libraryStatus,

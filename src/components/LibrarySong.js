@@ -7,13 +7,11 @@ export const LibrarySong = ({
   song,
   setCurrentSong,
   audioRef,
-  isPlaying,
+  // isPlaying,
   id,
   currentSong,
-  // libraryStatus,
-  // setLibraryStatus,
 }) => {
-  const [{ songs,libraryStatus }, dispatch] = useStateValue();
+  const [{ songs, libraryStatus, isPlaying }, dispatch] = useStateValue();
 
   const selectSongHandler = async (e) => {
     await setCurrentSong(song);
@@ -35,7 +33,6 @@ export const LibrarySong = ({
       type: actionTypes.SET_LIBRARY_STATUS,
       libraryStatus: !libraryStatus,
     });
-    // setLibraryStatus(!libraryStatus);
   };
   return (
     <div

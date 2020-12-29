@@ -2,14 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useStateValue } from "../StateProvider";
 import { LibrarySong, SwitchTheme } from "./index";
 
-export const Library = ({
-  setCurrentSong,
-  audioRef,
-  isPlaying,
-  // libraryStatus,
-  // setLibraryStatus,
-  currentSong,
-}) => {
+export const Library = ({ setCurrentSong, audioRef, currentSong }) => {
   const songsLibrary = useRef(null);
   const [{ songs, libraryStatus }] = useStateValue();
 
@@ -31,8 +24,6 @@ export const Library = ({
           {songs.map((song) => (
             <LibrarySong
               currentSong={currentSong}
-              // setSongs={setSongs}
-              isPlaying={isPlaying}
               setCurrentSong={setCurrentSong}
               key={song.id}
               song={song}
@@ -40,16 +31,11 @@ export const Library = ({
               songs={songs}
               audioRef={audioRef}
               id={song.id}
-              // setLibraryStatus={setLibraryStatus}
-              // libraryStatus={libraryStatus}
             />
           ))}
         </div>
         <div className="switchSection">
-          <SwitchTheme
-          // setLibraryStatus={setLibraryStatus}
-          // libraryStatus={libraryStatus}
-          />
+          <SwitchTheme />
         </div>
       </div>
     )
