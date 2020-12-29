@@ -13,14 +13,16 @@ export const initialState = {
       active: true,
     },
   ],
+  libraryStatus: false,
 };
 
-// setLibraryStatus, libraryStatus , audioRef, isPlaying, songs, setSongs, setCurrentSong, currentSong
+// setLibraryStatus, libraryStatus , audioRef, isPlaying, setCurrentSong, currentSong
 
 export const actionTypes = {
   SET_THEME_STATE: "SET_THEME_STATE",
   SET_VOLUME: "SET_VOLUME",
   SET_SONGS: "SET_SONGS",
+  SET_LIBRARY_STATUS: "SET_LIBRARY_STATUS",
 };
 
 function reducer(state, action) {
@@ -32,6 +34,8 @@ function reducer(state, action) {
       return { ...state, volume: action.volume };
     case actionTypes.SET_SONGS:
       return { ...state, songs: action.songs };
+    case actionTypes.SET_LIBRARY_STATUS:
+      return { ...state, libraryStatus: action.libraryStatus };
     default:
       return state;
   }

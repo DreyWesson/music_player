@@ -3,17 +3,15 @@ import { useStateValue } from "../StateProvider";
 import { LibrarySong, SwitchTheme } from "./index";
 
 export const Library = ({
-  // songs,
   setCurrentSong,
   audioRef,
   isPlaying,
-  // setSongs,
-  libraryStatus,
-  setLibraryStatus,
+  // libraryStatus,
+  // setLibraryStatus,
   currentSong,
 }) => {
   const songsLibrary = useRef(null);
-  const [{ songs }] = useStateValue();
+  const [{ songs, libraryStatus }] = useStateValue();
 
   useEffect(() => {
     //Scroll to selected
@@ -42,15 +40,15 @@ export const Library = ({
               songs={songs}
               audioRef={audioRef}
               id={song.id}
-              setLibraryStatus={setLibraryStatus}
-              libraryStatus={libraryStatus}
+              // setLibraryStatus={setLibraryStatus}
+              // libraryStatus={libraryStatus}
             />
           ))}
         </div>
         <div className="switchSection">
           <SwitchTheme
-            setLibraryStatus={setLibraryStatus}
-            libraryStatus={libraryStatus}
+          // setLibraryStatus={setLibraryStatus}
+          // libraryStatus={libraryStatus}
           />
         </div>
       </div>

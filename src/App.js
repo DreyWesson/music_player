@@ -7,20 +7,10 @@ import { actionTypes } from "./reducer";
 // import data from "./data";
 
 function App() {
-  const [{ themeState, volume, songs }, dispatch] = useStateValue();
-  // const [songs, setSongs] = useState([
-  //   {
-  //     name: "Beaver Creek",
-  //     cover:
-  //       "https://chillhop.com/wp-content/uploads/2020/09/0255e8b8c74c90d4a27c594b3452b2daafae608d-1024x1024.jpg",
-  //     artist: "Aso, Middle School, Aviino",
-  //     audio: "https://mp3.chillhop.com/serve.php/?mp3=10075",
-  //     color: ["#205950", "#2ab3bf"],
-  //     id: "vsGb2i2CmbigpNV30BIX",
-  //     active: true,
-  //   },
-  // ]);
-
+  const [
+    { themeState, volume, songs, libraryStatus },
+    dispatch,
+  ] = useStateValue();
   const timeUpdateHandler = (e) => {
     const current = e.target.currentTime,
       duration = e.target.duration,
@@ -62,7 +52,7 @@ function App() {
         }),
       })
     );
-  }, []);
+  }, [dispatch]);
 
   //Ref
   const audioRef = useRef(null),
@@ -73,7 +63,7 @@ function App() {
       duration: 0,
       animationPercentage: 0,
     }),
-    [libraryStatus, setLibraryStatus] = useState(false),
+    // [libraryStatus, setLibraryStatus] = useState(false),
     [repeat, setRepeat] = useState(false);
 
   const songEndHandler = async () => {
@@ -95,8 +85,8 @@ function App() {
         }`}
       >
         <Nav
-          libraryStatus={libraryStatus}
-          setLibraryStatus={setLibraryStatus}
+        // libraryStatus={libraryStatus}
+        // setLibraryStatus={setLibraryStatus}
         />
 
         <Song currentSong={currentSong} isPlaying={isPlaying} />
@@ -109,20 +99,16 @@ function App() {
           songInfo={songInfo}
           setSongInfo={setSongInfo}
           setCurrentSong={setCurrentSong}
-          songs={songs}
-          // setSongs={setSongs}
           setRepeat={setRepeat}
           repeat={repeat}
         />
         <Library
           currentSong={currentSong}
-          songs={songs}
-          libraryStatus={libraryStatus}
-          // setSongs={setSongs}
+          // libraryStatus={libraryStatus}
           setCurrentSong={setCurrentSong}
           audioRef={audioRef}
           isPlaying={isPlaying}
-          setLibraryStatus={setLibraryStatus}
+          // setLibraryStatus={setLibraryStatus}
         />
         <audio
           onLoadedMetadataCapture={setSongVolume}

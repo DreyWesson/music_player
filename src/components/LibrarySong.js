@@ -6,24 +6,22 @@ import { activeSongFN } from "../utils";
 export const LibrarySong = ({
   song,
   setCurrentSong,
-  // songs,
   audioRef,
   isPlaying,
-  // setSongs,
   id,
   currentSong,
-  libraryStatus,
-  setLibraryStatus,
+  // libraryStatus,
+  // setLibraryStatus,
 }) => {
-  const [{ songs }, dispatch] = useStateValue();
+  const [{ songs,libraryStatus }, dispatch] = useStateValue();
 
   const selectSongHandler = async (e) => {
     await setCurrentSong(song);
     dispatch({
       type: actionTypes.SET_SONGS,
-      songs: activeSongFN(songs, currentSong)
-    })
-    
+      songs: activeSongFN(songs, currentSong),
+    });
+
     if (isPlaying) audioRef.current.play();
 
     const activeSong = songs.map((song) =>
@@ -31,10 +29,13 @@ export const LibrarySong = ({
     );
     dispatch({
       type: actionTypes.SET_SONGS,
-      songs: activeSong
-    })
-    // setSongs(activeSong);
-    setLibraryStatus(!libraryStatus);
+      songs: activeSong,
+    });
+    dispatch({
+      type: actionTypes.SET_LIBRARY_STATUS,
+      libraryStatus: !libraryStatus,
+    });
+    // setLibraryStatus(!libraryStatus);
   };
   return (
     <div
