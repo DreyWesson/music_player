@@ -17,8 +17,6 @@ export const initialState = {
   isPlaying: false,
 };
 
-// audioRef, isPlaying, setCurrentSong, currentSong
-
 export const actionTypes = {
   SET_THEME_STATE: "SET_THEME_STATE",
   SET_VOLUME: "SET_VOLUME",

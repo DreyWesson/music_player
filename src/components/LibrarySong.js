@@ -11,11 +11,12 @@ export const LibrarySong = ({
   currentSong,
 }) => {
   const [{ songs, libraryStatus, isPlaying }, dispatch] = useStateValue();
+  const { SET_SONGS, SET_LIBRARY_STATUS } = actionTypes;
 
   const selectSongHandler = async (e) => {
     await setCurrentSong(song);
     dispatch({
-      type: actionTypes.SET_SONGS,
+      type: SET_SONGS,
       songs: activeSongFN(songs, currentSong),
     });
 
@@ -25,17 +26,17 @@ export const LibrarySong = ({
       id === song.id ? { ...song, active: true } : { ...song, active: false }
     );
     dispatch({
-      type: actionTypes.SET_SONGS,
+      type: SET_SONGS,
       songs: activeSong,
     });
     dispatch({
-      type: actionTypes.SET_LIBRARY_STATUS,
+      type: SET_LIBRARY_STATUS,
       libraryStatus: !libraryStatus,
     });
   };
   return (
     <div
-      className={`LibrarySong ${song.active ? "selected" : ""}`}
+      className={`LibrarySong ${song.active && "selected"}`}
       onClick={selectSongHandler}
     >
       <img alt={song.name + " album image"} src={song.cover} />

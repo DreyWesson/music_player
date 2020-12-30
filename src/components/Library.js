@@ -11,14 +11,12 @@ export const Library = ({ setCurrentSong, audioRef, currentSong }) => {
     const index = songs.findIndex((e) => e.id === currentSong.id),
       children = [...songsLibrary.current.children];
     let scrolledLength = 0;
-    children.forEach((e, i) =>
-      i < index ? (scrolledLength += e.offsetHeight) : ""
-    );
+    children.forEach((e, i) => i < index && (scrolledLength += e.offsetHeight));
     songsLibrary.current.scrollTop = scrolledLength;
   }, [currentSong, songs]);
   return (
     songs && (
-      <div className={`Library ${libraryStatus ? "Library-active" : ""}`}>
+      <div className={`Library ${libraryStatus && "Library-active"}`}>
         <h1 className="Library-label">Library</h1>
         <div ref={songsLibrary} className="songsLib">
           {songs.map((song) => (

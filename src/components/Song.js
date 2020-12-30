@@ -7,7 +7,7 @@ export const Song = ({ currentSong }) => {
   return (
     <div className="song-container">
       <img
-        className={`${isPlaying ? "playing" : ""}`}
+        className={`${isPlaying && "playing"}`}
         alt={currentSong?.name + " album image"}
         src={currentSong?.cover}
       />

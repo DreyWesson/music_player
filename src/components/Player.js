@@ -25,46 +25,47 @@ export const Player = ({
   repeat,
 }) => {
   const [{ songs, volume, isPlaying }, dispatch] = useStateValue();
+  const { SET_VOLUME, SET_SONGS, SET_PLAY } = actionTypes;
   const setVolume = (volume) => {
     dispatch({
-      type: actionTypes.SET_VOLUME,
+      type: SET_VOLUME,
       volume,
     });
   };
+  const isPlayingDispatch = (data) =>
+    dispatch({ type: SET_PLAY, isPlaying: data });
 
   //Handlers
   const shuffleHandler = async () => {
-    let songsref = [...songs];
-    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
-    songsref.splice(currentIndex, 1);
-    let random = Math.floor(Math.random() * songsref.length);
-    let randomSong = songsref[random];
-    dispatch({ type: actionTypes.SET_PLAY, isPlaying: true });
+    let songsRef = [...songs],
+      currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    songsRef.splice(currentIndex, 1);
+    let random = Math.floor(Math.random() * songsRef.length),
+      randomSong = songsRef[random];
+    isPlayingDispatch(true);
     await setCurrentSong(randomSong);
     dispatch({
-      type: actionTypes.SET_SONGS,
+      type: SET_SONGS,
       songs: activeSongFN(songs, currentSong),
     });
 
     audioRef.current.play();
-    const activeSong = songs.map((song) => {
-      if (song === randomSong) {
-        return { ...randomSong, active: true };
-      } else {
-        return { ...song, active: false };
-      }
-    });
+    const activeSong = songs.map((song) =>
+      song === randomSong
+        ? { ...randomSong, active: true }
+        : { ...song, active: false }
+    );
     dispatch({
-      type: actionTypes.SET_SONGS,
+      type: SET_SONGS,
       songs: activeSong,
     });
   };
   const playSongHandler = () => {
     if (isPlaying === false) {
-      dispatch({ type: actionTypes.SET_PLAY, isPlaying: !isPlaying });
+      isPlayingDispatch(!isPlaying);
       audioRef.current.play();
     } else {
-      dispatch({ type: actionTypes.SET_PLAY, isPlaying: !isPlaying });
+      isPlayingDispatch(!isPlaying);
       audioRef.current.pause();
     }
   };
@@ -72,9 +73,7 @@ export const Player = ({
     setSongInfo({ ...songInfo, currentTime: e.target.value });
     audioRef.current.currentTime = e.target.value;
   };
-  const repeatHandler = () => {
-    setRepeat(!repeat);
-  };
+  const repeatHandler = () => setRepeat(!repeat);
   const changeVolumeHandler = (e) => {
     const value = e.target.value / 100;
     setVolume(value);
@@ -87,22 +86,19 @@ export const Player = ({
   const skipSong = async (direction) => {
     const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
     if (direction === "back") {
-      await setCurrentSong(
-        songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
-      );
+      const currentSongIndex =
+        songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1];
+      await setCurrentSong(currentSongIndex);
       dispatch({
-        type: actionTypes.SET_SONGS,
-        songs: activeSongFN(
-          songs,
-          songs[currentIndex === 0 ? songs.length - 1 : currentIndex - 1]
-        ),
+        type: SET_SONGS,
+        songs: activeSongFN(songs, currentSongIndex),
       });
     } else {
-      await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-
+      const currentSongIndex = songs[(currentIndex + 1) % songs.length];
+      await setCurrentSong(currentSongIndex);
       dispatch({
-        type: actionTypes.SET_SONGS,
-        songs: activeSongFN(songs, songs[(currentIndex + 1) % songs.length]),
+        type: SET_SONGS,
+        songs: activeSongFN(songs, currentSongIndex),
       });
     }
     if (isPlaying) audioRef.current.play();
@@ -222,7 +218,7 @@ export const Player = ({
             <AllInclusiveOutlined className="repeat" fontSize="large" />
           </IconButton>
           <div
-            className={`${repeat ? "active-repeat" : ""}`}
+            className={`${repeat && "active-repeat"}`}
             style={{
               background: currentSong?.color[0],
               filter: `drop-shadow(0px 0px 3px ${currentSong?.color[0]})`,

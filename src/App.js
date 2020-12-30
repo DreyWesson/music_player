@@ -72,14 +72,14 @@ function App() {
     }
     const currentIndex = songs?.findIndex((song) => song.id === currentSong.id);
     await setCurrentSong(songs[[(currentIndex + 1) % songs.length]]);
-    if (isPlaying) audioRef.current.play();
+    isPlaying && audioRef.current.play();
   };
   const setSongVolume = () => (audioRef.current.volume = volume);
   return (
     songs && (
       <div
-        className={`App ${themeState === "Dark" ? "DarkTheme" : ""} ${
-          libraryStatus ? "active-library" : ""
+        className={`App ${themeState === "Dark" && "DarkTheme"} ${
+          libraryStatus && "active-library"
         }`}
       >
         <Nav />
